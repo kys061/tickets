@@ -46,6 +46,10 @@ angular.module('app').config(function($routeProvider, $locationProvider) {
             templateUrl: '/partials/tickets/ticket-list',
             controller: 'mvTicketListCtrl'
         })
+        .when('/tickets/:id', {
+            templateUrl: '/partials/tickets/ticket-detail',
+            controller: 'mvTicketDetailCtrl'
+        })
 
 });
 
