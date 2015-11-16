@@ -20,6 +20,10 @@
                     .col-md-10
                         input.form-control(id="lname", type="text", placeholder="Last Name", ng-model="lname", required)
                 .form-group
+                    label.col-md-2.control-label(for="company") Company
+                    .col-md-10
+                        input.form-control(id="company", type="text", placeholder="Company", ng-model="company", required)
+                .form-group
                     .col-md-10.col-md-offset-2
                         .pull-right
                             button.btn.btn-primary(ng-click="signup()", ng-disabled="signupForm.$invalid") Submit

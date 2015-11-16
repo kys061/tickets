@@ -10,7 +10,7 @@ var mongoose = require('mongoose');
 var ticketSchema = mongoose.Schema({
     title: {type:String, required:'{PATH} is required!'},
     contents: {type:String, required:'{PATH} is required!'},
-    published: {type:Date, required:'{PATH} is required!'},
+    published: {type:Date, default: Date.now},
     user_id: {type:String},
     company: {type:String},
     comments: {

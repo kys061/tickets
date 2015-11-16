@@ -1,0 +1,36 @@
+.container
+    .well
+        form.form-horizontal(name="ticketaddForm")
+            fieldset
+                legend New Ticket
+                .form-group
+                    label.col-md-2.control-label(for="title") Title
+                    .col-md-10
+                        input.form-control(id="title", type="text", placeholder="title", ng-model="title", required)
+                .form-group
+                    label.col-md-2.control-label(for="contents") Contents
+                    .col-md-10
+                        textarea.form-control(id="contents", row="8",ng-model="contents", required)
+                .form-group
+                    label.col-md-2.control-label(for="type") Type
+                    .col-md-10
+                        select.c-select.form-control(id="type", ng-model="type", required)
+                            option(value="open") open
+                            option(value="hold") hold
+                            option(value="close") close
+                .form-group
+                    label.col-md-2.control-label(for="writer") Writer
+                    .col-md-10
+                        select.c-select.form-control(id="writer", ng-model="user_id", required)
+                            option(value="{{user.username}}") {{user.username}}
+                .form-group
+                    label.col-md-2.control-label(for="company") Company
+                    .col-md-10
+                        select.c-select.form-control(id="company", ng-model="company", required)
+                            option(value="{{user.company}}") {{user.company}}
+                .form-group
+                    .col-md-10.col-md-offset-2
+                        .pull-right
+                            button.btn.btn-primary(ng-click="create();", ng-disabled="signupForm.$invalid") Submit
+                            | &nbsp;
+                            a.btn.btn-default(href="/") Cancel

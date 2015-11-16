@@ -11,8 +11,9 @@ angular.module('app').controller('mvTicketListCtrl', function($scope, mvTicket, 
     $scope.identity=mvIdentity;
 
     $scope.sortOptions = [
-        {value:"title", text: "Sort by Title"},
-        {value:"published", text: "Sort by Publish Date"}
+        {value:"published", text: "Sort by Publish Date"},
+        {value:"title", text: "Sort by Title"}
+
     ];
     $scope.sortOrder = $scope.sortOptions[0].value;
 
