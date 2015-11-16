@@ -9,12 +9,62 @@
     table.table.table-hover.table-striped.table-condensed
         thead
             tr
+                th Type
                 th Title
-                th Contents
-                th published
+                th Published
+                th Writer
+                th Company
         tbody
-            tr(ng-repeat="ticket in tickets | filter:searchText | orderBy:sortOrder")
+            tr(dir-paginate="ticket in tickets |filter: { type: 'open' } |filter: {user_id: user.username} | filter:searchText | orderBy:sortOrder | itemsPerPage: pageSize" current-page="currentPage.open" pagination-id="open")
+                td {{ticket.type[0]}}
                 td
                     a(href="tickets/{{ticket._id}}") {{ticket.title}}
-                td {{ticket.contents}}
-                td {{ticket.published}}
+                td {{ticket.published | date : 'yy년 M월 d일 hh:mm a' : +09}}
+                td {{ticket.user_id}}
+                td {{ticket.company}}
+    .row
+        .col-xs-12
+            .text-center
+                dir-pagination-controls(boundary-links="true" template-url="../vendor/angularUtils-pagination/dirPagination.tpl.html" pagination-id="open")
+
+    table.table.table-hover.table-striped.table-condensed
+        thead
+            tr
+                th Type
+                th Title
+                th Published
+                th Writer
+                th Company
+        tbody
+            tr(dir-paginate="ticket in tickets |filter: { type: 'hold' } |filter: {user_id: user.username} | filter:searchText | orderBy:sortOrder | itemsPerPage: pageSize" current-page="currentPage.hold" pagination-id="hold")
+                td {{ticket.type[0]}}
+                td
+                    a(href="tickets/{{ticket._id}}") {{ticket.title}}
+                td {{ticket.published | date : 'yy년 M월 d일 hh:mm a' : +09}}
+                td {{ticket.user_id}}
+                td {{ticket.company}}
+    .row
+        .col-xs-12
+            .text-center
+                dir-pagination-controls(boundary-links="true" template-url="../vendor/angularUtils-pagination/dirPagination.tpl.html" pagination-id="hold")
+
+    table.table.table-hover.table-striped.table-condensed
+        thead
+            tr
+                th Type
+                th Title
+                th Published
+                th Writer
+                th Company
+        tbody
+            tr(dir-paginate="ticket in tickets |filter: { type: 'close' } |filter: {user_id: user.username} | filter:searchText | orderBy:sortOrder | itemsPerPage: pageSize" current-page="currentPage.close" pagination-id="close")
+                td {{ticket.type[0]}}
+                td
+                    a(href="tickets/{{ticket._id}}") {{ticket.title}}
+                td {{ticket.published | date : 'yy년 M월 d일 hh:mm a' : +09}}
+                td {{ticket.user_id}}
+                td {{ticket.company}}
+    .row
+        .col-md-12
+            .text-center
+                dir-pagination-controls(boundary-links="true" template-url="../vendor/angularUtils-pagination/dirPagination.tpl.html" pagination-id="close")

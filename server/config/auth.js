@@ -19,8 +19,10 @@ exports.authenticate = function(req, res, next) {
 
 exports.requiresApiLogin = function(req, res, next) {
     if(!req.isAuthenticated()){
+        var err = new Error('로그인 없이는 티켓을 확인 할 수 없습니다!');
         res.status(403);
-        res.end();
+        //res.end();
+        return res.send({reason:err.toString()});
     } else {
         next();
     }

@@ -14,6 +14,9 @@ body {
 button {
   margin-left: 10px;
 }
+.navbar-nav>li>a.signup {
+  padding-top: 11.5px;
+}
 .top-padding-med {
   padding-top: 10px;
 }

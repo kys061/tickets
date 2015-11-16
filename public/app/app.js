@@ -1,4 +1,4 @@
-angular.module('app', ['ngResource','ngRoute']);
+angular.module('app', ['ngResource','ngRoute', 'angularUtils.directives.dirPagination']);
 
 angular.module('app').config(function($routeProvider, $locationProvider) {
 

@@ -16,7 +16,7 @@ module.exports = function (app) {
     app.get('/api/courses', courses.getCourses);
     app.get('/api/courses/:id', courses.getCourseById);
 
-    app.get('/api/tickets', auth.requiresRole('user'), tickets.getTickets);
+    app.get('/api/tickets', auth.requiresApiLogin, tickets.getTickets);
 
     // when somebody requests /partials/main,
     // express is going to render the main.jade file inside the partials dir inside the views dir.
