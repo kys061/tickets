@@ -15,7 +15,7 @@ var ticketSchema = mongoose.Schema({
     company: {type:String},
     comments: {
         contents: {type:String},
-        published: {type:Date},
+        published: {type:Date, default: Date.now},
         user_id: {type:String},
         company: {type:String}
     },

@@ -2,7 +2,9 @@
 var mongoose = require('mongoose'),
     userModel = require('../models/User'),
     courseModel = require('../models/Course'),
-    ticketModel = require('../models/Ticket');
+    ticketModel = require('../models/Ticket'),
+    commentModel = require('../models/Comment');
+
 
 
 module.exports = function(config) {
@@ -17,4 +19,5 @@ module.exports = function(config) {
     userModel.createDefaultUsers();
     courseModel.createDefaultCourses();
     ticketModel.createDefaultTickets();
+    commentModel.createDefaultComments();
 }

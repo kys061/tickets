@@ -3,6 +3,7 @@ var auth = require('./auth'),
     users = require('../controller/users'),
     courses = require('../controller/courses'),
     tickets = require('../controller/tickets'),
+    comments = require('../controller/comments'),
     User = mongoose.model('User');
 //LocalStrategy = require('passport-local').Strategy;
 
@@ -19,6 +20,9 @@ module.exports = function (app) {
     app.get('/api/tickets', auth.requiresApiLogin, tickets.getTickets);
     app.post('/api/tickets', auth.requiresApiLogin, tickets.createTicket);
     app.get('/api/tickets/:id', auth.requiresApiLogin, tickets.getTicketById);
+
+    app.get('/api/comments', auth.requiresApiLogin, comments.getComments);
+    app.post('/api/comments', auth.requiresApiLogin, comments.createComment);
 
 
     // when somebody requests /partials/main,

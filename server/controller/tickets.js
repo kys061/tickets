@@ -39,3 +39,27 @@ exports.createTicket = function(req, res, next) {
         //})
     })
 };
+
+exports.createComment = function(req, res, next) {
+    var commentData = req.body;
+    console.log(commentData);
+
+    //Ticket.create(commentData, function(err, ticket) {  // err is the error that mongodb can create.
+    //    if(err) {
+    //        //console.log("ERROR:");
+    //        //console.log(err.toString().indexOf('E11000'));
+    //        //if(err.toString().indexOf('E11000') > -1) {
+    //        //    err = new Error('Duplicate Username');
+    //        //}
+    //        console.log(err);
+    //        res.status(400);
+    //        return res.send({reason:err.toString()});
+    //    }
+    //    console.log(ticket);
+    //    res.send(ticket);
+    //    //req.logIn(user, function(err) {
+    //    //    if(err) {return next(err);}
+    //    //    res.send(user);
+    //    //})
+    //})
+};
