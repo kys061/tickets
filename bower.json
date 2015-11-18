@@ -16,6 +16,8 @@
     "angular-route": "~1.4.7",
     "bootstrap": "~3.3.5",
     "angular-mocks": "~1.4.7",
-    "angularUtils-pagination": "angular-utils-pagination#~0.9.2"
+    "angularUtils-pagination": "angular-utils-pagination#~0.9.2",
+    "textAngular": "~1.4.6",
+    "font-awesome": "~4.4.0"
   }
 }
