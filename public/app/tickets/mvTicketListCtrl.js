@@ -13,8 +13,8 @@ angular.module('app').controller('mvTicketListCtrl', function($scope, mvTicket, 
     $scope.sortOptions = [
         {value:"published", text: "Sort by Publish Date"},
         {value:"title", text: "Sort by Title"}
-
     ];
+
     $scope.sortOrder = $scope.sortOptions[0].value;
 
     $scope.currentPage = {

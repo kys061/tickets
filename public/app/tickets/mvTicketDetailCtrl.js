@@ -5,29 +5,39 @@ angular.module('app').controller('mvTicketDetailCtrl', function($scope, mvTicket
     // mvCachedCourses.query returns array but that array exposes a promise that will resolve
     // when the data comes back, and that's contained in the $promise property
 
+    $scope.identity = mvIdentity;
 
     mvTicket.query().$promise.then(function(collection) {
         collection.forEach(function(ticket) {
             if(ticket._id === $routeParams.id) {
                 $scope.ticket = ticket;
+                console.log($scope.ticket);
+                $scope.changetype = {
+                    _id: $scope.ticket._id,
+                    title: $scope.ticket.title,
+                    contents: $scope.ticket.contents,
+                    user_id: $scope.ticket.user_id,
+                    company: $scope.ticket.company
+
+                };
+
                 mvComment.query().$promise.then(function(collection) {
-                    console.log("collection:");
-                    console.log(collection);
+                    //console.log("collection:");
+                    //console.log(collection);
                     var i = 0;
                     $scope.comments = [];
                     collection.forEach(function(comment) {
-                        console.log("comments:");
+                        //console.log("comments:");
                         if(comment.ticket_id === $scope.ticket._id) {
                             $scope.comments[i] = comment;
                             i = i + 1;
-                            console.log($scope.comments);
+                            //console.log($scope.comments);
                         }
                     })
                 })
             }
         })
     })
-
 
     //mvComment.query().$promise.then(function(collection) {
     //    collection.forEach(function(comment) {
@@ -75,7 +85,27 @@ angular.module('app').controller('mvTicketDetailCtrl', function($scope, mvTicket
         $scope.user_id = "";
         $scope.company = "";
     }
-
-
     };
+
+    //$scope.ticket_id = $scope.ticket._id;
+    //$scope.title = $scope.ticket.title;
+    //$scope.contents = $scope.ticket.contents;
+    //$scope.user_id = $scope.ticket.user_id;
+    //$scope.company = $scope.ticket.company;
+
+    $scope.update = function() {
+        var newTypeData = {
+            _id: $scope.changetype._id,
+            title: $scope.changetype.title,
+            contents: $scope.changetype.contents,
+            type: $scope.change_type,
+            user_id: $scope.changetype.user_id,
+            company: $scope.changetype.company
+        };
+
+        mvTicketService.updateType(newTypeData).then(function() {
+            mvNotifier.notify('티켓 상태가 ' + newTypeData.type + '로 변경되었습니다!!!');
+            $location.path('/tickets');
+        })
+    }
 });

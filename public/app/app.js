@@ -44,15 +44,19 @@ angular.module('app').config(function($routeProvider, $locationProvider) {
         })
         .when('/tickets', {
             templateUrl: '/partials/tickets/ticket-list',
-            controller: 'mvTicketListCtrl'
+            controller: 'mvTicketListCtrl', resolve: routeRoleCheck.user
+        })
+        .when('/tickets/ticket-list-admin', {
+            templateUrl: '/partials/tickets/ticket-list-admin',
+            controller: 'mvTicketListCtrl', resolve: routeRoleCheck.admin
         })
         .when('/tickets/add', {
             templateUrl: '/partials/tickets/ticket-add',
-            controller: 'mvTicketCreateCtrl'
+            controller: 'mvTicketCreateCtrl', resolve: routeRoleCheck.user
         })
         .when('/tickets/:id', {
             templateUrl: '/partials/tickets/ticket-detail',
-            controller: 'mvTicketDetailCtrl'
+            controller: 'mvTicketDetailCtrl', resolve: routeRoleCheck.user
         })
 
 

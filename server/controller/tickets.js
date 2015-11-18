@@ -40,6 +40,18 @@ exports.createTicket = function(req, res, next) {
     })
 };
 
+exports.updateTicket = function(req, res) {
+    var ticketUpdates = req.body;
+    console.log(ticketUpdates);
+    Ticket.findOneAndUpdate({ _id: ticketUpdates._id}, ticketUpdates, function(err, ticket){
+        if(err) {
+            return res.send({reason:err.toString()});
+        }
+        console.log(ticket);
+        res.send(ticket);
+    });
+}
+
 exports.createComment = function(req, res, next) {
     var commentData = req.body;
     console.log(commentData);

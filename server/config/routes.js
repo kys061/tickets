@@ -20,6 +20,7 @@ module.exports = function (app) {
     app.get('/api/tickets', auth.requiresApiLogin, tickets.getTickets);
     app.post('/api/tickets', auth.requiresApiLogin, tickets.createTicket);
     app.get('/api/tickets/:id', auth.requiresApiLogin, tickets.getTicketById);
+    app.put('/api/tickets', auth.requiresApiLogin, tickets.updateTicket);
 
     app.get('/api/comments', auth.requiresApiLogin, comments.getComments);
     app.post('/api/comments', auth.requiresApiLogin, comments.createComment);

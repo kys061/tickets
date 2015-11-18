@@ -9,15 +9,22 @@
                     tr
                         th Type
                         td {{ticket.type[0]}}
+                        td
+                        th(colspan="2" ng-show="identity.currentUser.isAdmin()") Change Type :
+                            select.c-select(id="type", ng-model="change_type", required)
+                                option(value="open") open
+                                option(value="hold") hold
+                                option(value="close") close
+                            button.btn.btn-default(id="change_btn", ng-click="update()") change
                     tr
                         th Published
-                        td {{ticket.published | date : 'yy년 M월 d일 hh:mm a' : +09}}
+                        td(colspan=3) {{ticket.published | date : 'yy년 M월 d일 hh:mm a' : +09}}
                     tr
                         th Writer
-                        td {{ticket.user_id}}
+                        td(colspan=3) {{ticket.user_id}}
                     tr
                         th Company
-                        td {{ticket.company}}
+                        td(colspan=3) {{ticket.company}}
                     //tr
                     //    th Comments
                     //tr
@@ -29,7 +36,7 @@
         .col-md-12
             .panel.panel-info(ng-repeat="comment in comments")
                 .panel-heading {{comment.company}}
-                .panel-body {{comment.contents}}
+                .panel-body(ng-bind-html="comment.contents")
                 //ul.list-group
                 //    li.list-group-item Published
                 //    li.list-group-item Writer
