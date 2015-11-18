@@ -17,6 +17,14 @@ button {
 .navbar-nav>li>a.signup {
   padding-top: 7.5px;
 }
+@media screen and (max-width: 767px) {
+  .navbar-header {
+    position: relative;
+  }
+  body {
+    padding-top: 270px;
+  }
+}
 .top-padding-med {
   padding-top: 10px;
 }
