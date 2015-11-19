@@ -51,28 +51,43 @@ angular.module('app').controller('mvTicketDetailCtrl', function($scope, mvTicket
 
     $scope.user = mvIdentity.currentUser;
 
-    $scope.createComment = function() {
+    $scope.createComment = function(croppedDataUrl) {
         mvTicket.query().$promise.then(function(collection) {
             collection.forEach(function(ticket) {
                 if(ticket._id === $routeParams.id) {
                     $scope.ticket = ticket;
                     var newCommentData = {
                         contents: $scope.contents,
+                        img_path: "",
                         user_id: $scope.user_id,
                         company: $scope.company,
                         ticket_id: $scope.ticket._id
                     };
-                    mvTicketService.createComment(newCommentData).then(function(res) {
+                    mvTicketService.createComment(newCommentData, croppedDataUrl).then(function(res) {
                         mvNotifier.notify('Comment created!');
                         //console.log("response:");
                         //console.log(res);
-                        $scope.result = res;
-                        newCommentData.published = $scope.result.published;
+
                         //console.log("$scope.comments");
                         //console.log($scope.comments);
-                        $scope.comments.push(newCommentData);
-                        $scope.refreshComment();
-                        $location.path('/tickets/'+res.ticket_id);
+                        console.log(res);
+                        $scope.result
+
+                        if(res.data) {
+                            $scope.result = res.data;
+                            newCommentData.published = $scope.result.published;
+                            newCommentData.img_path = $scope.result.img_path;
+                            $location.path('/tickets/'+$scope.result.ticket_id);
+                            $scope.comments.push(newCommentData);
+                            $scope.refreshComment();
+                        } else {
+                            $scope.result = res;
+                            newCommentData.published = $scope.result.published;
+                            newCommentData.img_path = $scope.result.img_path;
+                            $location.path('/tickets/'+$scope.result.ticket_id);
+                            $scope.comments.push(newCommentData);
+                            $scope.refreshComment();
+                        }
                     }, function(reason) {
                         mvNotifier.error(reason);
                     })
@@ -84,6 +99,8 @@ angular.module('app').controller('mvTicketDetailCtrl', function($scope, mvTicket
         $scope.contents = "";
         $scope.user_id = "";
         $scope.company = "";
+        $scope.croppedDataUrl = "";
+        $scope.picFile = "";
     }
     };
 

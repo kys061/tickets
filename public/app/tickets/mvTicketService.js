@@ -63,17 +63,38 @@ angular.module('app').factory('mvTicketService', function($http, mvIdentity, $q,
         }
 
 
-    function createComment(newCommentData) {
+    function createComment(newCommentData, croppedDataUrl) {
         var newComment = new mvComment(newCommentData);
         var dfd = $q.defer();
-
-        newComment.$save().then(function(res){
-            //mvIdentity.currentUser = newUser;
-            //console.log(res);
-            dfd.resolve(res);
-        }, function(response) {
-            dfd.reject(response.data.reason);
-        });
+        if (croppedDataUrl !== undefined) {
+            console.log(Upload.dataUrltoBlob(croppedDataUrl));
+            Upload.upload({
+                url: 'http://localhost:3030/api/comments',
+                data: {newCommentData: newCommentData, file: Upload.dataUrltoBlob(croppedDataUrl)}
+            }).then(function (response) {
+                dfd.resolve(response);
+                $timeout(function () {
+                    croppedDataUrl.result = response.data;
+                });
+            }, function (response) {
+                if (response.status > 0)
+                    var errorMsg = response.status + ': ' + response.data;
+                return errorMsg;
+            }, function (evt) {
+                // Math.min is to fix IE which reports 200% sometimes
+                croppedDataUrl.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+            }, function (response) {
+                dfd.reject(response.data.reason);
+            });
+        } else {
+            newComment.$save().then(function (res) {
+                //mvIdentity.currentUser = newUser;
+                //console.log(res);
+                dfd.resolve(res);
+            }, function (response) {
+                dfd.reject(response.data.reason);
+            });
+        }
 
         return dfd.promise;
     }

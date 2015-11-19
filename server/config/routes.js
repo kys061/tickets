@@ -42,7 +42,7 @@ module.exports = function (app) {
     app.put('/api/tickets', auth.requiresApiLogin, tickets.updateTicket);
 
     app.get('/api/comments', auth.requiresApiLogin, comments.getComments);
-    app.post('/api/comments', auth.requiresApiLogin, comments.createComment);
+    app.post('/api/comments', auth.requiresApiLogin, uploading.single('file'), comments.createComment);
 
 
     // when somebody requests /partials/main,

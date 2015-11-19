@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 
 var commentSchema = mongoose.Schema({
         contents: {type:String},
+        img_path: {type:String},
         published: {type:Date, default: Date.now},
         user_id: {type:String},
         company: {type:String},

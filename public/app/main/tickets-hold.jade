@@ -1,7 +1,7 @@
 .panel.panel-primary
     .panel-heading.text-center HOLD TICKET
     .panel-body
-        .row(ng-repeat="ticket in tickets | filter:{type: 'hold'} |filter: {user_id: user.username} | orderBy:'published' | limitTo:10")
+        .row(ng-repeat="ticket in tickets | filter:{type: 'hold'} |filter: {user_id: user.username} | orderBy:'published':true | limitTo:10")
             .col-md-6 {{ticket.published | date : 'yy년 M월 d일 hh:mm a' : +09 }}
             .col-md-6
                 a(href="/tickets/{{ticket._id}}") {{ticket.title}}

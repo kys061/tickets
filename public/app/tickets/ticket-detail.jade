@@ -39,6 +39,7 @@
             .panel.panel-info(ng-repeat="comment in comments")
                 .panel-heading {{comment.company}}
                 .panel-body(ng-bind-html="comment.contents")
+                img.img-rounded.center-block(style="display: block;", src="{{comment.img_path}}")
                 //ul.list-group
                 //    li.list-group-item Published
                 //    li.list-group-item Writer
@@ -63,6 +64,18 @@
                         text-angular(id="contents", class="ta-editor" ng-model="contents", required)
                         //textarea.form-control(id="contents", row="8",ng-model="contents", required)
                 .form-group
+                    label.col-md-2.control-label(for="upload") upload
+                    .col-md-10
+                        button.btn.btn-default.ngf-select(id="upload", ng-model="picFile", name="file", accept="image/*") Select Picture
+                        .ngf-drop(ng-model="picFile", ngf-pattern="image/*", class="cropArea")
+                            img-crop(image="picFile | ngfDataUrl" result-image="croppedDataUrl", name="file", accept="image/*", ng-init="croppedDataUrl=''")
+                        div
+                            img(ng-src="{{croppedDataUrl}}")
+                        span(class="progress", ng-show="progress >= 0")
+                            div(style="width:{{progress}}%" ng-bind="progress + '%'")
+                        //span(ng-show="result") Upload Successful
+                        span(class="err", ng-show="errorMsg") {{errorMsg}}
+                .form-group
                     label.col-md-2.control-label(for="writer") Writer
                     .col-md-10
                         select.c-select.form-control(id="writer", ng-model="user_id", required)
@@ -75,6 +88,6 @@
                 .form-group
                     .col-md-10.col-md-offset-2
                         .pull-right
-                            button.btn.btn-primary(ng-click="createComment();", ng-disabled="signupForm.$invalid") Submit
+                            button.btn.btn-primary(ng-click="createComment(croppedDataUrl);", ng-disabled="ticketcommentForm.$invalid") Submit
                             | &nbsp;
                             a.btn.btn-default(href="/") Cancel
