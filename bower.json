@@ -18,6 +18,9 @@
     "angular-mocks": "~1.4.7",
     "angularUtils-pagination": "angular-utils-pagination#~0.9.2",
     "textAngular": "~1.4.6",
-    "font-awesome": "~4.4.0"
+    "font-awesome": "~4.4.0",
+    "angular-file-upload": "~2.2.0",
+    "ng-file-upload": "~10.0.2",
+    "ng-img-crop": "ngImgCrop#~0.3.2"
   }
 }

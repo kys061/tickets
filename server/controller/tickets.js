@@ -15,11 +15,38 @@ exports.getTicketById = function(req, res) {
 };
 
 exports.createTicket = function(req, res, next) {
-    var ticketData = req.body;
-    console.log(ticketData);
-    //ticketData.username = userData.username.toLowerCase();
-    //ticketData.salt = encrypt.createSalt();
-    //userData.hashed_pwd = encrypt.hashPwd(userData.salt, userData.password);
+    if (req.body.newTicketData) {
+        var ticketData = {
+            title: req.body.newTicketData.title,
+            contents: req.body.newTicketData.contents,
+            img_path: "",
+            type: req.body.newTicketData.type,
+            user_id: req.body.newTicketData.user_id,
+            company: req.body.newTicketData.company
+        };
+        //console.log("req.body : ");
+        //console.log(req.body); // form fields
+        //console.log("req.file : ");
+        //console.log(req.file); // form files
+        ticketData.img_path = req.file.path.slice(7,37);
+    } else {
+        var ticketData = req.body;
+    }
+
+
+    console.log("req.body : ");
+    console.log(req.body); // form fields
+    console.log("req.file : ");
+    console.log(req.file); // form files
+    //console.log("req.file.path : ");
+    //console.log(req.file.path);
+    //console.log("ticketData.img_path : ");
+    //console.log(ticketData.img_path);
+    //console.log("ticketData : ");
+    //console.log(ticketData);
+
+    //public/uploads/img/file-1447910826800
+    //console.log(req);// form files
     Ticket.create(ticketData, function(err, ticket) {  // err is the error that mongodb can create.
         if(err) {
             //console.log("ERROR:");
@@ -27,11 +54,11 @@ exports.createTicket = function(req, res, next) {
             //if(err.toString().indexOf('E11000') > -1) {
             //    err = new Error('Duplicate Username');
             //}
-            console.log(err);
+            //console.log(err);
             res.status(400);
             return res.send({reason:err.toString()});
         }
-        console.log(ticket);
+        //console.log(ticket);
         res.send(ticket);
         //req.logIn(user, function(err) {
         //    if(err) {return next(err);}

@@ -1,4 +1,5 @@
 var auth = require('./auth'),
+    multer = require('multer'),
     mongoose = require('mongoose'),
     users = require('../controller/users'),
     courses = require('../controller/courses'),
@@ -7,6 +8,19 @@ var auth = require('./auth'),
     User = mongoose.model('User');
 //LocalStrategy = require('passport-local').Strategy;
 
+var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+var config = require('./config')[env];
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './public/uploads/img')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now())
+    }
+});
+
+var uploading = multer({ storage: storage });
 
 module.exports = function (app) {
 
@@ -18,7 +32,12 @@ module.exports = function (app) {
     app.get('/api/courses/:id', courses.getCourseById);
 
     app.get('/api/tickets', auth.requiresApiLogin, tickets.getTickets);
-    app.post('/api/tickets', auth.requiresApiLogin, tickets.createTicket);
+    app.post('/api/tickets', auth.requiresApiLogin, uploading.single('file'), tickets.createTicket);
+    //app.post('/api/tickets/upload', auth.requiresApiLogin, uploading.single('file'), function(req, res){
+    //    console.log(req.body); // form fields
+    //    console.log(req.files); // form files
+    //    console.log(req.file); // form files
+    //});
     app.get('/api/tickets/:id', auth.requiresApiLogin, tickets.getTicketById);
     app.put('/api/tickets', auth.requiresApiLogin, tickets.updateTicket);
 

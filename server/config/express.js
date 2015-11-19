@@ -4,7 +4,8 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser'),
     session = require('express-session'),
-    passport = require('passport');
+    passport = require('passport'),
+    multer = require('multer');
 
 module.exports = function(app, config) {
     function compile(str, path) {
@@ -19,6 +20,7 @@ module.exports = function(app, config) {
     app.use(session({secret: 'multi vision unicorns'}));
     app.use(passport.initialize());
     app.use(passport.session());
+    //app.use(multer());
     app.use(stylus.middleware(
         {
             src: config.rootPath + '/public',

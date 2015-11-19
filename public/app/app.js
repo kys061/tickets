@@ -1,4 +1,4 @@
-angular.module('app', ['ngResource','ngRoute', 'angularUtils.directives.dirPagination', 'textAngular']);
+angular.module('app', ['ngResource','ngRoute', 'angularUtils.directives.dirPagination', 'textAngular', 'ngFileUpload', 'ngImgCrop']);
 
 angular.module('app').config(function($routeProvider, $locationProvider) {
 

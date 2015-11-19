@@ -5,12 +5,13 @@
             .panel.panel-primary
                 .panel-heading {{ticket.title}}
                 .panel-body(ng-bind-html="ticket.contents")
+                img.img-rounded.center-block(style="display: block;", src="{{ticket.img_path}}")
                 table.table.table-hover.table-striped.table-condensed
                     tr
                         th Type
                         td {{ticket.type[0]}}
                         td
-                        th(colspan="2" ng-show="identity.currentUser.isAdmin()") Change Type :
+                        th(colspan="2" ng-show="identity.currentUser.isAdmin()") Change Type
                             select.c-select(id="type", ng-model="change_type", required)
                                 option(value="open") open
                                 option(value="hold") hold
@@ -25,7 +26,8 @@
                     tr
                         th Company
                         td(colspan=3) {{ticket.company}}
-                    //tr
+
+    //tr
                     //    th Comments
                     //tr
                     //    td comment_contents
@@ -43,9 +45,11 @@
                 //    li.list-group-item Company
                 table.table.table-hover
                     tr
-                        th {{comment.published | date : 'yy년 M월 d일 hh:mm a' : +09}}
+                        th Published
+                        td {{comment.published | date : 'yy년 M월 d일 hh:mm a' : +09}}
                     tr
-                        th {{comment.user_id}}
+                        th Writer
+                        td {{comment.user_id}}
         //.col-md-6
         //    h3 Published on {{ticket.published | date}}
         //UI for comments

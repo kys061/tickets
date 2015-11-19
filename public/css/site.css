@@ -52,6 +52,25 @@ table {
   font-size: 100%;
   margin: 20px 0;
 }
+.cropArea {
+  background: #e4e4e4;
+  overflow: hidden;
+  width: 500px;
+  height: 350px;
+}
+form .progress {
+  line-height: 15px;
+}
+.progress {
+  display: inline-block;
+  width: 100px;
+  border: 3px groove #ccc;
+}
+.progress div {
+  font-size: smaller;
+  background: #ffa500;
+  width: 0;
+}
 footer {
   padding-left: 15px;
   padding-right: 15px;

@@ -15,6 +15,30 @@
                         text-angular(id="contents", ng-model="contents", required)
                         //textarea.form-control(id="contents", row="8",ng-model="contents", required)
                 .form-group
+                    label.col-md-2.control-label(for="upload") upload
+                    .col-md-10
+                        button.btn.btn-default.ngf-select(id="upload", ng-model="picFile", name="file", accept="image/*") Select Picture
+                        .ngf-drop(ng-model="picFile", ngf-pattern="image/*", class="cropArea")
+                            img-crop(image="picFile | ngfDataUrl" result-image="croppedDataUrl", name="file", accept="image/*", ng-init="croppedDataUrl=''")
+                        div
+                            img(ng-src="{{croppedDataUrl}}")
+                        span(class="progress", ng-show="progress >= 0")
+                            div(style="width:{{progress}}%" ng-bind="progress + '%'")
+                        span(ng-show="result") Upload Successful
+                        span(class="err", ng-show="errorMsg") {{errorMsg}}
+                        //input.ngf-select(id="upload" type="file", ng-model="picFile", name="file", accept="image/*", ngf-max-size="2MB")
+                        //i(ng-show="ticketaddForm.file.$error.required") *required
+                        //br
+                        //i(ng-show="ticketaddForm.file.$error.maxSize") File too large {{picFile.size / 1000000|number:1}}MB: max 2M
+                        //img(ng-show="ticketaddForm.file.$valid", ngf-thumbnail="picFile", class="thumb")
+                        //br
+                        //button.btn.btn-default(ng-click="picFile = null", ng-show="picFile") remove
+                        ////button.btn.btn-default(ng-disabled="!uploadfileForm.$valid", ng-multiple="multiple", ng-click="uploadPic(picFile)") upload
+                        //span(class="progress", ng-show="picFile.progress >= 0")
+                        //    .test(style="width:{{picFile.progress}}%", ng-bind="picFile.progress + '%'")
+                        //span(ng-show="picFile.result") upload success
+                        //span(class="err" ng-show="errorMsg") {{errorMsg}}
+                .form-group
                     label.col-md-2.control-label(for="type") Type
                     .col-md-10
                         select.c-select.form-control(id="type", ng-model="type", required)
@@ -34,6 +58,27 @@
                 .form-group
                     .col-md-10.col-md-offset-2
                         .pull-right
-                            button.btn.btn-primary(ng-click="create();", ng-disabled="signupForm.$invalid") Submit
+                            button.btn.btn-primary(ng-multiple="multiple", ng-click="create(croppedDataUrl);", ng-disabled="ticketaddForm.$invalid") Submit
                             | &nbsp;
                             a.btn.btn-default(href="/") Cancel
+
+        //form.form-horizontal(name="uploadfileForm", enctype="multipart/form-data")
+        //    fieldset
+        //        legend Upload files
+        //        .form-group
+        //                label.col-md-2.control-label(for="upload") upload
+        //                .col-md-10
+        //                    input.ngf-select(id="upload" type="file", ng-model="picFile", name="file", accept="image/*", ngf-max-size="2MB" required)
+        //                    i(ng-show="uploadfileForm.file.$error.required") *required
+        //                    br
+        //                    i(ng-show="uploadfileForm.file.$error.maxSize") File too large {{picFile.size / 1000000|number:1}}MB: max 2M
+        //                    img(ng-show="uploadfileForm.file.$valid", ngf-thumbnail="picFile", class="thumb")
+        //                    br
+        //                    button.btn.btn-default(ng-click="picFile = null", ng-show="picFile") remove
+        //                    button.btn.btn-default(ng-disabled="!uploadfileForm.$valid", ng-multiple="multiple", ng-click="uploadPic(picFile)") upload
+        //                    span(class="progress", ng-show="picFile.progress >= 0")
+        //                        .test(style="width:{{picFile.progress}}%", ng-bind="picFile.progress + '%'")
+        //                    span(ng-show="picFile.result") upload success
+        //                    span(class="err" ng-show="errorMsg") {{errorMsg}}
+
+

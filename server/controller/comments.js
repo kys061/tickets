@@ -2,7 +2,7 @@ var Comment = require('mongoose').model('Comment');
 
 exports.getComments = function(req, res) {
     Comment.find({}).exec(function(err, collection) {
-        console.log(collection);
+        //console.log(collection);
         if(err) {console.log(err);}
         res.send(collection);
     })
@@ -20,11 +20,11 @@ exports.createComment = function(req, res) {
     console.log(CommentData);
     Comment.create(CommentData, function(err, comment) {  // err is the error that mongodb can create.
         if(err) {
-            console.log(err);
+            //console.log(err);
             res.status(400);
             return res.send({reason:err.toString()});
         }
-        console.log(comment);
+        //console.log(comment);
         res.send(comment);
     })
 };
